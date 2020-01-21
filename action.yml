@@ -1,0 +1,64 @@
+name: 'Publich Gitbook'
+description: 'Publish Gitbook to GitHub Pages'
+author: 'Liren Tu'
+branding:
+  icon: 'book'
+
+on:
+  push:
+    branches:    
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [8]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install gitbook
+      run: |
+        npm install gitbook-cli  -g
+        gitbook install
+
+    - name: Build gitbook
+      run: |
+        gitbook build
+
+    - name: Checkout gh-pages branch
+      run: |
+        git checkout gh-pages || git checkout -b gh-pages
+        git pull origin gh-pages --rebase
+
+    - name: Config git
+      run: |
+        git config --local user.name "${{ secrets.GIT_NAME }}"
+        git config --local user.email "${{ secrets.GIT_EMAIL }}"
+
+    - name: Publish to GitHub Pages
+      run: |
+        # copy the static site files into the current directory
+        cp -R _book/* .
+
+        # remove 'node_modules' and '_book' directory
+        git clean -fx node_modules
+        git clean -fx _book
+
+        # add all files
+        git add .
+
+        # commit
+        git commit -a -m "Update docs"
+
+        # push to the origin
+        git push -u origin gh-pages
+
+      env:
+        CI: true
