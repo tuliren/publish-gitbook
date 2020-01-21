@@ -11,8 +11,7 @@ jobs:
     steps:
     - name: Checkout action
       uses: actions/checkout@v1
-    - uses: ./ # Uses the action in the root directory
-    - name: Publich Gitbook
-      uses: ./
+    - name: Publish Gitbook
+      uses: tuliren/publish-gitbook@master
       with:
         github_token: "${{ secrets.GITHUB_TOKEN }}"
