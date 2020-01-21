@@ -1,7 +1,12 @@
 #!/bin/sh -l
 
+# config git
+DEFAULT_USER=${GITHUB_ACTOR}
+DEFAULT_EMAIL=${GITHUB_ACTOR}@users.noreply.github.com
+git config --local user.name "${INPUT_GIT_USER:=${DEFAULT_USER}}"
+git config --local user.email "${INPUT_GIT_EMAIL:=${DEFAULT_EMAIL}}"
+
 # check github token
-env
 [ -z "${INPUT_GITHUB_TOKEN}" ] && {
   echo 'Missing input "github_token: ${{ secrets.GITHUB_TOKEN }}".';
   exit 1;
@@ -21,10 +26,6 @@ gitbook install
 
 # build gitbook
 gitbook build
-
-# config git
-git config --local user.name "${INPUT_GIT_USER:-${GITHUB_ACTOR}}"
-git config --local user.email "${INPUT_GIT_EMAIL:-${GITHUB_ACTOR}@users.noreply.github.com}"
 
 # copy the static site files into the current directory
 cp -R _book/* .
