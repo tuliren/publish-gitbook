@@ -1,0 +1,15 @@
+{
+  "plugins": [
+    "-sharing",
+    "github",
+    "anchors",
+    "splitter",
+    "expandable-chapters"
+  ],
+
+  "pluginsConfig": {
+    "github": {
+      "url": "https://github.com/tuliren/publish-gitbook"
+    }
+  }
+}
