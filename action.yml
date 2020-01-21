@@ -4,6 +4,15 @@ author: 'Liren Tu'
 branding:
   icon: 'book'
   color: 'blue'
+inputs:
+  github_token:
+    description: 'Github token for the repo.'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.github_token }}
 
 on:
   push:
