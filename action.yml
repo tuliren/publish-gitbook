@@ -6,10 +6,18 @@ branding:
   color: 'blue'
 inputs:
   github_token:
-    description: 'Github token for the repo.'
+    description: 'Github token for the repo'
     required: true
+  git_user:
+    description: 'Git user to use for publishing the gitbook change; default to your username'
+    required: false
+  git_email:
+    description: 'Git email to use for publishing the gitbook change; default to username@users.noreply.github.com'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.github_token }}
+    - ${{ inputs.git_user }}
+    - ${{ inputs.git_email }}

@@ -14,4 +14,4 @@ jobs:
     - name: Publish Gitbook
       uses: tuliren/publish-gitbook@master
       with:
-        github_token: "${{ secrets.GITHUB_TOKEN }}"
+        github_token: ${{ secrets.GITHUB_TOKEN }}
