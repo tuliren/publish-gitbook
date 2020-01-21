@@ -1,10 +1,8 @@
 #!/bin/sh -l
 
 # config git
-DEFAULT_USER=${GITHUB_ACTOR}
-DEFAULT_EMAIL=${GITHUB_ACTOR}@users.noreply.github.com
-git config --local user.name "${INPUT_GIT_USER:=${DEFAULT_USER}}"
-git config --local user.email "${INPUT_GIT_EMAIL:=${DEFAULT_EMAIL}}"
+git config --local user.name "${GITHUB_ACTOR}"
+git config --local user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
 # check github token
 [ -z "${INPUT_GITHUB_TOKEN}" ] && {
