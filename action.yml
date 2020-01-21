@@ -3,6 +3,7 @@ description: 'Publish Gitbook to GitHub Pages'
 author: 'Liren Tu'
 branding:
   icon: 'book'
+  color: 'blue'
 
 on:
   push:
@@ -12,37 +13,41 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [8]
 
     steps:
     - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js 8
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 8
+
+    - name: Checkout gh-pages branch
+      run: |
+        set +e
+        git fetch
+        git checkout -b gh-pages
+        git pull origin gh-pages --rebase || echo "Branch gh-pages does not exist on remote"
+        set -e
 
     - name: Install gitbook
       run: |
         npm install gitbook-cli  -g
+        gitbook -v
         gitbook install
 
     - name: Build gitbook
       run: |
         gitbook build
 
-    - name: Checkout gh-pages branch
+    - name: Config git and setup publisher
       run: |
-        git checkout gh-pages || git checkout -b gh-pages
-        git pull origin gh-pages --rebase
+        # git config --local user.name "${GIT_NAME}"
+        # git config --local user.email "${GIT_EMAIL}"
 
-    - name: Config git
-      run: |
-        git config --local user.name "${{ secrets.GIT_NAME }}"
-        git config --local user.email "${{ secrets.GIT_EMAIL }}"
+        PUBLISHER_REPO="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+        git remote add publisher ${PUBLISHER_REPO}
 
-    - name: Publish to GitHub Pages
+    - name: Publish to github pages
       run: |
         # copy the static site files into the current directory
         cp -R _book/* .
@@ -55,10 +60,11 @@ jobs:
         git add .
 
         # commit
-        git commit -a -m "Update docs"
+        COMMIT_MESSAGE="Update gitbook `date '+%Y-%m-%d %H:%M:%S'`"
+        git commit -a -m "${COMMIT_MESSAGE}"
 
-        # push to the origin
-        git push -u origin gh-pages
+        # push to the publisher
+        git push -q -u publisher gh-pages
 
       env:
         CI: true
