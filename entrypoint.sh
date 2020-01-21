@@ -14,6 +14,7 @@ git config --local user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 set +e
 git checkout gh-pages || git checkout -b gh-pages
 git fetch origin && git reset origin/gh-pages
+git status
 set -e
 
 # install gitbook
