@@ -23,8 +23,8 @@ gitbook install
 gitbook build
 
 # config git
-# git config --local user.name "${GIT_NAME}"
-# git config --local user.email "${GIT_EMAIL}"
+git config --local user.name "${{ secrets.GIT_NAME }}"
+git config --local user.email "${{ secrets.GIT_EMAIL }}"
 
 # copy the static site files into the current directory
 cp -R _book/* .
