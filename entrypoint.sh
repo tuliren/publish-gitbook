@@ -12,9 +12,8 @@ git config --local user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
 # checkout gh-pages branch
 set +e
-git fetch
-git checkout -b gh-pages
-git pull origin gh-pages --rebase || echo "Branch gh-pages does not exist on remote"
+git checkout gh-pages || git checkout -b gh-pages
+git fetch origin && git reset origin/gh-pages
 set -e
 
 # install gitbook
