@@ -10,6 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Publich Gitbook
-      uses: tuliren/publish-gitbook
+      uses: ./
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
