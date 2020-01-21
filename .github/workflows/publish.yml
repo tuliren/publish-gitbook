@@ -9,7 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout action
+      uses: actions/checkout@v1
+    - uses: ./ # Uses the action in the root directory
     - name: Publich Gitbook
       uses: ./
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: "${{ secrets.GITHUB_TOKEN }}"

@@ -1,6 +1,7 @@
 #!/bin/sh -l
 
 # check github token
+env
 [ -z "${INPUT_GITHUB_TOKEN}" ] && {
   echo 'Missing input "github_token: ${{ secrets.GITHUB_TOKEN }}".';
   exit 1;
