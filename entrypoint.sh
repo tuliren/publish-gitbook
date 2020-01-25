@@ -25,13 +25,6 @@ fi
 git config --local user.name "${GITHUB_ACTOR}"
 git config --local user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
-# checkout gh-pages branch
-set +e
-git checkout gh-pages || git checkout -b gh-pages
-git fetch origin && git reset origin/gh-pages
-git status
-set -e
-
 # install gitbook
 print_info "installing gitbook-cli"
 npm install gitbook-cli  -g
@@ -44,6 +37,13 @@ gitbook install
 print_info "buildling gitbook"
 gitbook build
 
+# checkout gh-pages branch
+set +e
+git checkout gh-pages || git checkout -b gh-pages
+git fetch origin && git reset origin/gh-pages
+git status
+set -e
+
 # copy the static site files into the current directory
 cp -R _book/* .
 
@@ -53,7 +53,6 @@ git clean -fx node_modules
 git clean -fx _book
 
 # add all files
-git status
 git add .
 
 # commit
@@ -64,4 +63,4 @@ git remote add publisher ${PUBLISHER_REPO}
 
 # push to the publisher
 print_info "pushing to gh-pages branch"
-git push -q -u publisher gh-pages
+git push -u publisher gh-pages
