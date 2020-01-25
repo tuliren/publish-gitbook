@@ -13,9 +13,9 @@ PUBLISHER_REPO=""
 if [ -n "${INPUT_PERSONAL_TOKEN}" ]; then
     print_info "using provided PERSONAL_TOKEN"
     PUBLISHER_REPO="https://x-access-token:${INPUT_PERSONAL_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-elif [ -n "${GITHUB_TOKEN}" ]; then
+elif [ -n "${INPUT_GITHUB_TOKEN}" ]; then
     print_info "using automatic GITHUB_TOKEN"
-    PUBLISHER_REPO="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+    PUBLISHER_REPO="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
 else
     print_error "no PERSONAL_TOKEN or GITHUB_TOKEN found, you can provide one in your workflow YAML"
     exit 1
