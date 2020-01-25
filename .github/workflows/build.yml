@@ -1,4 +1,4 @@
-name: 'Publish Gitbook'
+name: 'build'
 
 on:
   push:
