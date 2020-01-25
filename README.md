@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v2
       # Now run this publish action
       - name: Publish
-        uses: tuliren/publish-gitbook@v0.9.1
+        uses: tuliren/publish-gitbook@v1.0.0
         with:
           # specify either github_token or personal_token
           # github_token: ${{ secrets.GITHUB_TOKEN }}
