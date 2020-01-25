@@ -53,6 +53,7 @@ git clean -fx node_modules
 git clean -fx _book
 
 # add all files
+git status
 git add .
 
 # commit
