@@ -255,32 +255,26 @@
 <span class="hljs-attr">    name:</span> Build Gitbook
 <span class="hljs-attr">    runs-on:</span> ubuntu-latest
 <span class="hljs-attr">    steps:</span>
-      <span class="hljs-comment"># We must check out the repo first</span>
-<span class="hljs-attr">      - name:</span> Checkout
+      <span class="hljs-comment"># Check out the repo first</span>
+<span class="hljs-attr">      - name:</span> Checkout code
 <span class="hljs-attr">        uses:</span> actions/checkout@v2
-      <span class="hljs-comment"># Now run this publish action</span>
+      <span class="hljs-comment"># Run this action to publish gitbook</span>
 <span class="hljs-attr">      - name:</span> Publish
 <span class="hljs-attr">        uses:</span> tuliren/publish-gitbook@v1<span class="hljs-number">.0</span><span class="hljs-number">.0</span>
 <span class="hljs-attr">        with:</span>
           <span class="hljs-comment"># specify either github_token or personal_token</span>
-          <span class="hljs-comment"># github_token: ${{ secrets.GITHUB_TOKEN }}</span>
-<span class="hljs-attr">          personal_token:</span> ${{ secrets.PERSONAL_TOKEN }}
+<span class="hljs-attr">          github_token:</span> ${{ secrets.GITHUB_TOKEN }}
+          <span class="hljs-comment"># personal_token: ${{ secrets.PERSONAL_TOKEN }}</span>
 </code></pre>
 <p>Please note that either <code>personal_token</code> or <code>github_token</code> needs to be specified.</p>
-<h3 id="githubtoken"><a name="githubtoken" class="plugin-anchor" href="#githubtoken"><i class="fa fa-link" aria-hidden="true"></i></a><code>github_token</code></h3>
+<h3 id="githubtoken-recommended"><a name="githubtoken-recommended" class="plugin-anchor" href="#githubtoken-recommended"><i class="fa fa-link" aria-hidden="true"></i></a><code>github_token</code> (recommended)</h3>
 <p>If you choose <code>github_token</code>, this token is auto created when workflow launches. No extra operation is needed.</p>
-<p>Unfortunately this auto token cannot trigger a GitHub Pages build. So the current workaround is to generate a new Personal Access Token and supply it separately as <code>personal_token</code>.</p>
-<p>More details can be found here:</p>
-<ul>
-<li><a href="https://github.community/t5/GitHub-Actions/Github-action-not-triggering-gh-pages-upon-push/td-p/26869" target="_blank">Github action not triggering gh-pages upon push</a></li>
-<li><a href="https://github.com/peaceiris/actions-gh-pages/issues/9" target="_blank">Cannot deploy with GITHUB_TOKEN for new repository</a></li>
-</ul>
-<h3 id="personaltoken-recommended"><a name="personaltoken-recommended" class="plugin-anchor" href="#personaltoken-recommended"><i class="fa fa-link" aria-hidden="true"></i></a><code>personal_token</code> (recommended)</h3>
+<h3 id="personaltoken"><a name="personaltoken" class="plugin-anchor" href="#personaltoken"><i class="fa fa-link" aria-hidden="true"></i></a><code>personal_token</code></h3>
 <ul>
 <li>Create a Personal Access Token (<a href="https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line#creating-a-token" target="_blank">instruction</a>).</li>
 <li>Add the token as a repo secret (<a href="https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets#creating-encrypted-secrets" target="_blank">instruction</a>).<ul>
 <li>Secret name: <code>PERSONAL_TOKEN</code></li>
-<li>Secret value: <token></token></li>
+<li>Secret value: <code>&lt;token&gt;</code></li>
 </ul>
 </li>
 </ul>
@@ -319,7 +313,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Contents","level":"1.1","depth":1,"next":{"title":"Menu level 1-1","level":"1.2","depth":1,"ref":"","articles":[{"title":"Level 2-1","level":"1.2.1","depth":2,"ref":"","articles":[]},{"title":"Level 2-2","level":"1.2.2","depth":2,"ref":"","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["-sharing","github","anchors","splitter","expandable-chapters"],"pluginsConfig":{"github":{"url":"https://github.com/tuliren/publish-gitbook"},"splitter":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"expandable-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2020-01-25T09:58:27.273Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-25T09:59:12.218Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Contents","level":"1.1","depth":1,"next":{"title":"Menu level 1-1","level":"1.2","depth":1,"ref":"","articles":[{"title":"Level 2-1","level":"1.2.1","depth":2,"ref":"","articles":[]},{"title":"Level 2-2","level":"1.2.2","depth":2,"ref":"","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["-sharing","github","anchors","splitter","expandable-chapters"],"pluginsConfig":{"github":{"url":"https://github.com/tuliren/publish-gitbook"},"splitter":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"expandable-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2020-08-29T05:05:38.980Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-08-29T05:06:21.220Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
