@@ -1,6 +1,6 @@
 # Gitbook Publish Action
 
-![Build Status](https://github.com/tuliren/publish-gitbook/workflows/build/badge.svg)
+[![Build Status](https://img.shields.io/github/workflow/status/tuliren/publish-gitbook/build?style=for-the-badge)](https://github.com/tuliren/publish-gitbook/actions/workflows/build.yml) [![GitHub Marketplace](https://img.shields.io/badge/github%20marketplace-publish%20gitbook-blue?style=for-the-badge)](https://github.com/marketplace/actions/publish-gitbook)
 
 This action publishes a gitbook to github pages.
 
