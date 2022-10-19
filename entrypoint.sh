@@ -11,13 +11,13 @@ print_error(){
 PUBLISHER_REPO=""
 # setup publisher
 if [ -n "${INPUT_PERSONAL_TOKEN}" ]; then
-    print_info "using provided PERSONAL_TOKEN"
+    print_info "Using provided PERSONAL_TOKEN"
     PUBLISHER_REPO="https://x-access-token:${INPUT_PERSONAL_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
 elif [ -n "${INPUT_GITHUB_TOKEN}" ]; then
-    print_info "using automatic GITHUB_TOKEN"
+    print_info "Using automatic GITHUB_TOKEN"
     PUBLISHER_REPO="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
 else
-    print_error "no PERSONAL_TOKEN or GITHUB_TOKEN found, you can provide one in your workflow YAML"
+    print_error "No PERSONAL_TOKEN or GITHUB_TOKEN found, you can provide one in your workflow YAML"
     exit 1
 fi
 
@@ -26,15 +26,15 @@ git config --local user.name "${GITHUB_ACTOR}"
 git config --local user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
 # install gitbook
-print_info "installing gitbook-cli"
+print_info "Installing gitbook-cli"
 npm install gitbook-cli  -g
 
-print_info "installing gitbook plugins"
+print_info "Installing gitbook plugins"
 gitbook --version
 gitbook install
 
 # build gitbook
-print_info "buildling gitbook"
+print_info "Buildling gitbook"
 set -e
 gitbook build
 
@@ -49,7 +49,7 @@ set -e
 cp -R _book/* .
 
 # remove 'node_modules' and '_book' directory
-print_info "cleaning artifacts"
+print_info "Cleaning artifacts"
 git clean -fx node_modules
 git clean -fx _book
 
@@ -63,5 +63,5 @@ git commit -a -m "${COMMIT_MESSAGE}"
 git remote add publisher ${PUBLISHER_REPO}
 
 # push to the publisher
-print_info "pushing to gh-pages branch"
+print_info "Pushing to gh-pages branch"
 git push -u publisher gh-pages
