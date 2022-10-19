@@ -1,5 +1,7 @@
 #!/bin/sh -l
 
+set -e
+
 print_info(){
   echo "\033[32mINFO \033[0m $@" > /dev/stderr
 }
@@ -35,7 +37,6 @@ gitbook install
 
 # build gitbook
 print_info "Buildling gitbook"
-set -e
 gitbook build
 
 # checkout gh-pages branch
