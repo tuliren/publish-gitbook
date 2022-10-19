@@ -35,6 +35,7 @@ gitbook install
 
 # build gitbook
 print_info "buildling gitbook"
+set -e
 gitbook build
 
 # checkout gh-pages branch
